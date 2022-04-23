@@ -38,21 +38,22 @@ const getTodosPromise = (resource) => {
         xhttp.send();
     })    
 }
+
 console.log(1);
-getTodos('https://jsonplaceholder.typicode.com/todos/1',(err, data) => {
-if(err){
-    console.log(err)
-}else{
-    console.log(data);
-    getTodos('sandbox.json',(err, data) => {
-    if(err){
-        console.log(err)
-    }else{
-        console.log(data);
-    }
-    });
-}
-});
+// getTodos('https://jsonplaceholder.typicode.com/todos/1',(err, data) => {
+// if(err){
+//     console.log(err)
+// }else{
+//     console.log(data);
+//     getTodos('sandbox.json',(err, data) => {
+//     if(err){
+//         console.log(err)
+//     }else{
+//         console.log(data);
+//     }
+//     });
+// }
+// });
 
 
 // getTodosPromise('https://jsonplaceholder.typicode.com/todos/1').then(data => {
@@ -60,4 +61,17 @@ if(err){
 // }).catch(err => {
 //     console.log(err)
 // });
+
+
+//chaining promise
+getTodosPromise('https://jsonplaceholder.typicode.com/todos/1').then(data => {
+    console.log(data);
+    return getTodosPromise('sandbox.json');
+}).then(data => {
+    console.log('promise 2 fired');
+    console.log(data);
+}).catch(err => {
+    console.log(err);
+});
+
 console.log(2);
